@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 export interface FiscalProfileType {
 	customer_id: mongoose.Types.ObjectId
@@ -22,4 +22,4 @@ const fiscalProfileSchema = new Schema<FiscalProfileType>({
 	updated_at: { type: Date },
 })
 
-export default models.FiscalProfile || model<FiscalProfileType>("FiscalProfile", fiscalProfileSchema, "fiscal_profiles")
+export default mongoose.models.FiscalProfile || model<FiscalProfileType>("FiscalProfile", fiscalProfileSchema, "fiscal_profiles")

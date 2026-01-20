@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 
 export interface CartItem {
 	article_id: Schema.Types.ObjectId
@@ -30,4 +30,4 @@ const cartSchema = new Schema<CartType>({
 	updated_at: { type: Date, default: Date.now },
 })
 
-export default models.Cart || model<CartType>("Cart", cartSchema, "carts")
+export default mongoose.models.Cart || model<CartType>("Cart", cartSchema, "carts")

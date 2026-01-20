@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 import bcrypt from "bcryptjs"
 
 export enum CustomerStatus {
@@ -45,4 +45,4 @@ customerSchema.pre("save", async function (next) {
 	next()
 })
 
-export default models.Customer || model<CustomerType>("Customer", customerSchema, "customers")
+export default mongoose.models.Customer || model<CustomerType>("Customer", customerSchema, "customers")

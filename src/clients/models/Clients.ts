@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 export interface ClientType {
 	sn_code?: string | null
@@ -33,4 +33,4 @@ const clientSchema = new Schema<ClientType>(
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 )
 
-export default models.Client || model<ClientType>("Client", clientSchema, "clients")
+export default mongoose.models.Client || model<ClientType>("Client", clientSchema, "clients")

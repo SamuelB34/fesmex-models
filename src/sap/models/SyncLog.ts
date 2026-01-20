@@ -1,4 +1,4 @@
-import { Schema, model, models, Document, Types } from "mongoose"
+import mongoose, { Schema, model, Document, Types } from "mongoose"
 
 /**
  * Sync Log Types
@@ -91,4 +91,4 @@ const syncLogSchema = new Schema(
 syncLogSchema.index({ entity_type: 1, entity_id: 1, status: 1 })
 syncLogSchema.index({ status: 1, next_retry_at: 1 })
 
-export const SyncLog = models.SyncLog || model<ISyncLog>("SyncLog", syncLogSchema, "sync_logs")
+export const SyncLog = mongoose.models.SyncLog || model<ISyncLog>("SyncLog", syncLogSchema, "sync_logs")

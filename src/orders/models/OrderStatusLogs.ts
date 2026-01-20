@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 import { OrderStatus } from "./Orders"
 
 export interface OrderStatusLogType {
@@ -34,4 +34,4 @@ const orderStatusLogSchema = new Schema<OrderStatusLogType>({
 	},
 })
 
-export default models.OrderStatusLog || model<OrderStatusLogType>("OrderStatusLog", orderStatusLogSchema, "order_status_logs")
+export default mongoose.models.OrderStatusLog || model<OrderStatusLogType>("OrderStatusLog", orderStatusLogSchema, "order_status_logs")

@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 
 export interface ClientPaymentMethodType {
 	client_id: Types.ObjectId
@@ -22,7 +22,7 @@ const clientPaymentMethodSchema = new Schema<ClientPaymentMethodType>(
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 )
 
-export default models.ClientPaymentMethod || model<ClientPaymentMethodType>(
+export default mongoose.models.ClientPaymentMethod || model<ClientPaymentMethodType>(
 	"ClientPaymentMethod",
 	clientPaymentMethodSchema,
 	"client_payment_methods"

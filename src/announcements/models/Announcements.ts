@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 import { UserRole } from "../../users/models/Users"
 
 export interface AnnouncementType {
@@ -58,4 +58,4 @@ const announcementSchema = new Schema<AnnouncementType>({
 	},
 })
 
-export default models.Announcement || model<AnnouncementType>("Announcement", announcementSchema, "announcements")
+export default mongoose.models.Announcement || model<AnnouncementType>("Announcement", announcementSchema, "announcements")

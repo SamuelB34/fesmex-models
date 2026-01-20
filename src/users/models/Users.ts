@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 import bcrypt from "bcryptjs"
 
 export enum UserRole {
@@ -71,4 +71,4 @@ usersSchema.pre("save", async function (next) {
     next()
 })
 
-export default models.User || model<UserType>("User", usersSchema, "users")
+export default mongoose.models.User || model<UserType>("User", usersSchema, "users")

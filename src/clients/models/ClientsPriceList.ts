@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 
 export interface ClientPriceListType {
 	client_id: Types.ObjectId
@@ -22,7 +22,7 @@ const clientPriceListSchema = new Schema<ClientPriceListType>(
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 )
 
-export default models.ClientPriceList || model<ClientPriceListType>(
+export default mongoose.models.ClientPriceList || model<ClientPriceListType>(
 	"ClientPriceList",
 	clientPriceListSchema,
 	"client_price_lists"

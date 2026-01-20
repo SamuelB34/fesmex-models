@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 export enum OrderStatus {
 	PENDING = "pending",
@@ -33,4 +33,4 @@ const orderSchema = new Schema({
 	updated_at: { type: Date },
 })
 
-export default models.Order || model("Order", orderSchema, "orders")
+export default mongoose.models.Order || model("Order", orderSchema, "orders")
