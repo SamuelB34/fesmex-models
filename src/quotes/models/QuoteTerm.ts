@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 const quoteTermSchema = new Schema(
 	{
@@ -12,4 +12,4 @@ const quoteTermSchema = new Schema(
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 )
 
-export default models.QuoteTerm || model("QuoteTerm", quoteTermSchema, "quote_terms")
+export default mongoose.models.QuoteTerm || model("QuoteTerm", quoteTermSchema, "quote_terms")

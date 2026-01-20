@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 
 const inventoryStockSchema = new Schema({
 	article_id: { type: Types.ObjectId, ref: "Article", required: true },
@@ -9,4 +9,4 @@ const inventoryStockSchema = new Schema({
 	updated_at: { type: Date, default: Date.now },
 })
 
-export default models.InventoryStock || model("InventoryStock", inventoryStockSchema, "inventory_stocks")
+export default mongoose.models.InventoryStock || model("InventoryStock", inventoryStockSchema, "inventory_stocks")

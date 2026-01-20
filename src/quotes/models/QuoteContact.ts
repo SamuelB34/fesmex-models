@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 const quoteContactSchema = new Schema({
 	quote_id: { type: Schema.Types.ObjectId, ref: "Quote", required: true },
@@ -9,4 +9,4 @@ const quoteContactSchema = new Schema({
 	created_at: { type: Date, default: Date.now },
 })
 
-export default models.QuoteContact || model("QuoteContact", quoteContactSchema, "quote_contacts")
+export default mongoose.models.QuoteContact || model("QuoteContact", quoteContactSchema, "quote_contacts")

@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 const currencySchema = new Schema({
 	code: { type: String, required: true, unique: true },
@@ -6,4 +6,4 @@ const currencySchema = new Schema({
 	name: { type: String, required: true },
 })
 
-export default models.Currency || model("Currency", currencySchema, "currencies")
+export default mongoose.models.Currency || model("Currency", currencySchema, "currencies")

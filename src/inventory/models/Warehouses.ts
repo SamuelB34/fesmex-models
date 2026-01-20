@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 const warehouseSchema = new Schema({
 	code: { type: String, required: true, unique: true },
@@ -8,4 +8,4 @@ const warehouseSchema = new Schema({
 	updated_at: { type: Date },
 })
 
-export default models.Warehouse || model("Warehouse", warehouseSchema, "warehouses")
+export default mongoose.models.Warehouse || model("Warehouse", warehouseSchema, "warehouses")

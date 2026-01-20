@@ -1,6 +1,6 @@
 {
   "name": "@fesmex/models",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

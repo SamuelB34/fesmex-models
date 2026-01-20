@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 
 const priceListSchema = new Schema({
 	number: { type: String, required: true, unique: true },
@@ -7,4 +7,4 @@ const priceListSchema = new Schema({
 	updated_at: { type: Date },
 })
 
-export default models.PriceList || model("PriceList", priceListSchema, "price_lists")
+export default mongoose.models.PriceList || model("PriceList", priceListSchema, "price_lists")

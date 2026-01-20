@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose"
+import mongoose, { Schema, model, Types } from "mongoose"
 
 const articleSchema = new Schema({
 	article_number: { type: String, required: true, unique: true }, // SAP ItemCode
@@ -11,4 +11,4 @@ const articleSchema = new Schema({
 	updated_at: { type: Date },
 })
 
-export default models.Article || model("Article", articleSchema, "articles")
+export default mongoose.models.Article || model("Article", articleSchema, "articles")
