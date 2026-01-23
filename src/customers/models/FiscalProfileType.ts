@@ -1,15 +1,18 @@
-import mongoose, { Schema, model } from "mongoose"
+import mongoose, { Schema, model, type Model, type HydratedDocument, type Types } from "mongoose";
 
 export interface FiscalProfileType {
-	customer_id: mongoose.Types.ObjectId
-	rfc: string
-	razon_social: string
-	uso_cfdi: string
-	regimen_fiscal: string
-	cp: string // código postal
-	created_at: Date
-	updated_at?: Date
+	customer_id: Types.ObjectId;
+	rfc: string;
+	razon_social: string;
+	uso_cfdi: string;
+	regimen_fiscal: string;
+	cp: string;
+	created_at: Date;
+	updated_at?: Date;
 }
+
+export type FiscalProfileDoc = HydratedDocument<FiscalProfileType>;
+export type FiscalProfileModel = Model<FiscalProfileType>;
 
 const fiscalProfileSchema = new Schema<FiscalProfileType>({
 	customer_id: { type: Schema.Types.ObjectId, ref: "Customer", required: true },
@@ -20,6 +23,10 @@ const fiscalProfileSchema = new Schema<FiscalProfileType>({
 	cp: { type: String, required: true },
 	created_at: { type: Date, default: Date.now },
 	updated_at: { type: Date },
-})
+});
 
-export default mongoose.models.FiscalProfile || model<FiscalProfileType>("FiscalProfile", fiscalProfileSchema, "fiscal_profiles")
+const FiscalProfile: FiscalProfileModel =
+	(mongoose.models.FiscalProfile as FiscalProfileModel) ||
+	model<FiscalProfileType>("FiscalProfile", fiscalProfileSchema, "fiscal_profiles");
+
+export default FiscalProfile;

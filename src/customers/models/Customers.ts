@@ -1,5 +1,11 @@
-import mongoose, { Schema, model } from "mongoose"
-import bcrypt from "bcryptjs"
+import mongoose, {
+	Schema,
+	model,
+	type Model,
+	type HydratedDocument,
+	type Types,
+} from "mongoose";
+import bcrypt from "bcryptjs";
 
 export enum CustomerStatus {
 	ACTIVE = "active",
@@ -8,17 +14,20 @@ export enum CustomerStatus {
 }
 
 export interface CustomerType {
-	first_name: string
-	last_name: string
-	email: string
-	mobile?: string
-	password: string
-	status: CustomerStatus
-	fiscal_profile_id?: mongoose.Types.ObjectId
-	created_at: Date
-	updated_at?: Date
-	deleted_at?: Date
+	first_name: string;
+	last_name: string;
+	email: string;
+	mobile?: string;
+	password: string;
+	status: CustomerStatus;
+	fiscal_profile_id?: Types.ObjectId;
+	created_at: Date;
+	updated_at?: Date;
+	deleted_at?: Date;
 }
+
+export type CustomerDoc = HydratedDocument<CustomerType>;
+export type CustomerModel = Model<CustomerType>;
 
 const customerSchema = new Schema<CustomerType>({
 	first_name: { type: String, required: true },
@@ -35,14 +44,17 @@ const customerSchema = new Schema<CustomerType>({
 	created_at: { type: Date, default: Date.now },
 	updated_at: { type: Date },
 	deleted_at: { type: Date },
-})
+});
 
-// Hash password
 customerSchema.pre("save", async function (next) {
 	if (this.isModified("password")) {
-		this.password = await bcrypt.hash(this.password, 12)
+		this.password = await bcrypt.hash(this.password, 12);
 	}
-	next()
-})
+	next();
+});
 
-export default mongoose.models.Customer || model<CustomerType>("Customer", customerSchema, "customers")
+const Customer: CustomerModel =
+	(mongoose.models.Customer as CustomerModel) ||
+	model<CustomerType>("Customer", customerSchema, "customers");
+
+export default Customer;
