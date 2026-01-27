@@ -8,3 +8,9 @@ export * from "./announcements"
 export * from "./users"
 export * from "./carts"
 export * from "./auth"
+export { default as PasswordResetToken } from "./models/PasswordResetToken"
+export type {
+	PasswordResetTokenType,
+	PasswordResetTokenDoc,
+	PasswordResetTokenModel,
+} from "./models/PasswordResetToken"
