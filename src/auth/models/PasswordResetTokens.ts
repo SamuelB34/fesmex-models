@@ -32,6 +32,11 @@ passwordResetTokenSchema.index({ token_hash: 1 }, { unique: true });
 passwordResetTokenSchema.index({ expires_at: 1 }, { expireAfterSeconds: 0 });
 passwordResetTokenSchema.index({ customer_id: 1, expires_at: 1 });
 
+passwordResetTokenSchema.pre("save", function (next) {
+	this.updated_at = new Date();
+	next();
+});
+
 const PasswordResetToken: PasswordResetTokenModel =
 	(mongoose.models.PasswordResetToken as PasswordResetTokenModel) ||
 	model<PasswordResetTokenType>("PasswordResetToken", passwordResetTokenSchema, "password_reset_tokens");
