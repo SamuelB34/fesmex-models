@@ -7,3 +7,11 @@ export type {
 	PasswordResetTokenDoc,
 	PasswordResetTokenModel,
 } from "./models/PasswordResetTokens";
+
+export { default as EmailVerificationToken } from "./models/EmailVerificationTokens"
+export type {
+  EmailVerificationTokenType,
+  EmailVerificationTokenDoc,
+  EmailVerificationTokenModel,
+} from "./models/EmailVerificationTokens"
+
