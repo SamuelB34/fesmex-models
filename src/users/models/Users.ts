@@ -68,7 +68,6 @@ usersSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 12)
     }
-    next()
 })
 
 export default mongoose.models.User || model<UserType>("User", usersSchema, "users")

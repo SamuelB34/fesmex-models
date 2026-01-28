@@ -36,7 +36,6 @@ refreshTokenSchema.index({ customer_id: 1, expires_at: 1 });
 
 refreshTokenSchema.pre("save", function (next) {
 	this.updated_at = new Date();
-	next();
 });
 
 const RefreshToken: RefreshTokenModel =
