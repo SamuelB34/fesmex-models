@@ -64,7 +64,7 @@ const usersSchema = new Schema<UserType>({
     deleted_by: { type: Schema.Types.ObjectId, ref: "User" },
 })
 
-usersSchema.pre("save", async function (next) {
+usersSchema.pre("save", async function () {
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 12)
     }

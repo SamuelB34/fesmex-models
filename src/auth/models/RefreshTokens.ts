@@ -34,7 +34,7 @@ refreshTokenSchema.index({ token_hash: 1 }, { unique: true });
 refreshTokenSchema.index({ expires_at: 1 }, { expireAfterSeconds: 0 });
 refreshTokenSchema.index({ customer_id: 1, expires_at: 1 });
 
-refreshTokenSchema.pre("save", function (next) {
+refreshTokenSchema.pre("save", function () {
 	this.updated_at = new Date();
 });
 
