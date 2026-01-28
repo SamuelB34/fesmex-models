@@ -38,7 +38,7 @@ const customerSchema = new Schema<CustomerType>({
 	status: {
 		type: String,
 		enum: Object.values(CustomerStatus),
-		default: CustomerStatus.ACTIVE,
+		default: CustomerStatus.INACTIVE,
 	},
 	fiscal_profile_id: { type: Schema.Types.ObjectId, ref: "FiscalProfile" },
 	created_at: { type: Date, default: Date.now },
@@ -46,11 +46,10 @@ const customerSchema = new Schema<CustomerType>({
 	deleted_at: { type: Date },
 });
 
-customerSchema.pre("save", async function (next) {
+customerSchema.pre("save", async function() {
 	if (this.isModified("password")) {
 		this.password = await bcrypt.hash(this.password, 12);
 	}
-	next();
 });
 
 const Customer: CustomerModel =

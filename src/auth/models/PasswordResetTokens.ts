@@ -34,7 +34,6 @@ passwordResetTokenSchema.index({ customer_id: 1, expires_at: 1 });
 
 passwordResetTokenSchema.pre("save", function (next) {
 	this.updated_at = new Date();
-	next();
 });
 
 const PasswordResetToken: PasswordResetTokenModel =
