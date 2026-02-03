@@ -8,13 +8,16 @@ importers:
 
   .:
     dependencies:
+      '@fesmex/models':
+        specifier: ^0.1.34
+        version: 0.1.34(mongoose@9.1.4)
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
+      mongoose:
+        specifier: ^7 || ^8 || ^9
+        version: 9.1.4
     devDependencies:
-      '@types/mongoose':
-        specifier: ^5
-        version: 5.11.97
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(typescript@5.9.3)
@@ -180,6 +183,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@fesmex/models@0.1.34':
+    resolution: {integrity: sha512-/s9t/LlAozFhPNuSbRxarScVuVISWyqELJ/lUpetmYJsEGl5vib2c34NGGjsYayZI0ufaAswSP49qxiHipro2A==}
+    peerDependencies:
+      mongoose: ^7 || ^8 || ^9
+
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
@@ -323,10 +331,6 @@ packages:
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
-
-  '@types/mongoose@5.11.97':
-    resolution: {integrity: sha512-cqwOVYT3qXyLiGw7ueU2kX9noE8DPGRY6z8eUxudhXY8NZ7DMKYAxyZkLSevGfhCX3dO/AoX5/SO9lAzfjon0Q==}
-    deprecated: Mongoose publishes its own types, so you do not need to install this package.
 
   '@types/webidl-conversions@7.0.3':
     resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}
@@ -694,6 +698,11 @@ snapshots:
   '@esbuild/win32-x64@0.27.2':
     optional: true
 
+  '@fesmex/models@0.1.34(mongoose@9.1.4)':
+    dependencies:
+      bcryptjs: 3.0.3
+      mongoose: 9.1.4
+
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -788,18 +797,6 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.8': {}
-
-  '@types/mongoose@5.11.97':
-    dependencies:
-      mongoose: 9.1.4
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
 
   '@types/webidl-conversions@7.0.3': {}
 

@@ -9,6 +9,7 @@ const articleSchema = new Schema({
 	group_id: { type: Types.ObjectId, ref: "ArticleGroup", required: true },
 	created_at: { type: Date, default: Date.now },
 	updated_at: { type: Date },
+	deleted_at: { type: Date },
 })
 
 articleSchema.index(
@@ -17,5 +18,9 @@ articleSchema.index(
 )
 articleSchema.index({ group_id: 1, updated_at: -1 }, { name: "articles_group_updated" })
 articleSchema.index({ updated_at: -1 }, { name: "articles_updated" })
+articleSchema.index(
+	{ deleted_at: 1, updated_at: -1 },
+	{ name: "articles_not_deleted_sort" }
+)
 
 export default mongoose.models.Article || model("Article", articleSchema, "articles")
