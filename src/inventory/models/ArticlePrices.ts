@@ -11,4 +11,6 @@ const articlePriceSchema = new Schema({
 	updated_at: { type: Date },
 })
 
+articlePriceSchema.index({ article_id: 1, price_list_id: 1 }, { name: "article_prices_article_pricelist" })
+
 export default mongoose.models.ArticlePrice || model("ArticlePrice", articlePriceSchema, "article_prices")

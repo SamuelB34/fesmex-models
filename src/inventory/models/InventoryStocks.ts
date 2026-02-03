@@ -9,4 +9,6 @@ const inventoryStockSchema = new Schema({
 	updated_at: { type: Date, default: Date.now },
 })
 
+inventoryStockSchema.index({ article_id: 1, warehouse_id: 1 }, { name: "inventory_stocks_article_warehouse_unique", unique: true })
+
 export default mongoose.models.InventoryStock || model("InventoryStock", inventoryStockSchema, "inventory_stocks")
