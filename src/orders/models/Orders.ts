@@ -75,8 +75,7 @@ const orderSchema = new Schema(
 
 		shipping_address: { type: shippingAddressSchema, required: true },
 		subtotal: { type: Number, required: true, min: 0 },
-		shipping_fee: { type: Number, required: true, min: 0, default: 0 },
-
+		shipping_fee: { type: Number, min: 0, default: null },
 		total: { type: Number, required: true, min: 0 },
 		notes: { type: String, trim: true },
 	},
