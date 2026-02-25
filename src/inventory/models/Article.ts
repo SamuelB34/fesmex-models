@@ -20,6 +20,8 @@ const articleSchema = new Schema({
 	brand: { type: String },
 	model: { type: String },
 	group_id: { type: Types.ObjectId, ref: "ArticleGroup", required: true },
+	category_id: { type: Types.ObjectId, ref: "Category", required: false, index: true },
+	tags: { type: [Types.ObjectId], ref: "Tag", default: [], index: true },
 	files: {
 		images: { type: [articleFileSchema], required: false },
 		datasheets: { type: [articleFileSchema], required: false },
@@ -34,6 +36,7 @@ articleSchema.index(
 	{ name: "articles_text_search" }
 )
 articleSchema.index({ group_id: 1, updated_at: -1 }, { name: "articles_group_updated" })
+articleSchema.index({ category_id: 1, updated_at: -1 }, { name: "articles_category_updated" })
 articleSchema.index({ updated_at: -1 }, { name: "articles_updated" })
 articleSchema.index(
 	{ deleted_at: 1, updated_at: -1 },

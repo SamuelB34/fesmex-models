@@ -7,6 +7,7 @@ const inventoryStockSchema = new Schema({
 	min_stock: { type: Number },
 	max_stock: { type: Number },
 	updated_at: { type: Date, default: Date.now },
+	updated_by: { type: Types.ObjectId, ref: "User" },
 })
 
 inventoryStockSchema.index({ article_id: 1, warehouse_id: 1 }, { name: "inventory_stocks_article_warehouse_unique", unique: true })
