@@ -22,6 +22,8 @@ const articleSchema = new Schema({
 	group_id: { type: Types.ObjectId, ref: "ArticleGroup", required: true },
 	category_id: { type: Types.ObjectId, ref: "Category", required: false, index: true },
 	tags: { type: [Types.ObjectId], ref: "Tag", default: [], index: true },
+	is_featured: { type: Boolean, default: false, index: true },
+	featured_order: { type: Number, default: 0 },
 	files: {
 		images: { type: [articleFileSchema], required: false },
 		datasheets: { type: [articleFileSchema], required: false },
@@ -42,5 +44,6 @@ articleSchema.index(
 	{ deleted_at: 1, updated_at: -1 },
 	{ name: "articles_not_deleted_sort" }
 )
+articleSchema.index({ is_featured: 1, featured_order: 1 }, { name: "articles_featured_order" })
 
 export default mongoose.models.Article || model("Article", articleSchema, "articles")
