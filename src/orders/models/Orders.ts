@@ -73,7 +73,8 @@ const orderSchema = new Schema(
 
 		expires_at: { type: Date },
 
-		shipping_address: { type: shippingAddressSchema, required: true },
+		shipping_address: { type: shippingAddressSchema, required: false },
+		delivery_type: { type: String, enum: ['shipping', 'pickup'], required: true },
 		subtotal: { type: Number, required: true, min: 0 },
 		shipping_fee: { type: Number, min: 0, default: null },
 		total: { type: Number, required: true, min: 0 },
