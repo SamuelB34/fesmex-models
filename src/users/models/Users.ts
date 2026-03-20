@@ -6,6 +6,7 @@ export enum UserRole {
     SALES = "sales",
     TECHNICIAN = "technician",
     WAREHOUSEMAN = "warehouseman",
+    STORE_QA = "store_qa",
 }
 
 export enum UserStatus {
