@@ -9,3 +9,5 @@ export * from "./users"
 export * from "./carts"
 export * from "./auth"
 export * from "./payments"
+
+export { default as State, type StateType } from "./orders/models/State"
