@@ -77,6 +77,7 @@ const orderSchema = new Schema(
 		delivery_type: { type: String, enum: ['shipping', 'pickup'], required: true },
 		subtotal: { type: Number, required: true, min: 0 },
 		shipping_fee: { type: Number, min: 0, default: null },
+		shipping_state_id: { type: Schema.Types.ObjectId, ref: "State", default: null },
 		total: { type: Number, required: true, min: 0 },
 		notes: { type: String, trim: true },
 	},
