@@ -1,5 +1,48 @@
 import mongoose, { Schema, model, Types } from "mongoose"
 
+export interface ArticleContentType {
+	details?: string
+	applications?: string
+	technical_sheet_url?: string
+}
+
+export interface ArticleType {
+	article_number: string
+	description: string
+	unit: string
+	brand?: string
+	model?: string
+	group_id: Types.ObjectId
+	category_id?: Types.ObjectId
+	tags: Types.ObjectId[]
+	is_featured: boolean
+	featured_order: number
+	content?: ArticleContentType
+	files?: {
+		images?: Array<{
+			key: string
+			url: string
+			filename: string
+			mime_type: string
+			size: number
+			uploaded_at: Date
+			uploaded_by: string
+		}>
+		datasheets?: Array<{
+			key: string
+			url: string
+			filename: string
+			mime_type: string
+			size: number
+			uploaded_at: Date
+			uploaded_by: string
+		}>
+	}
+	created_at?: Date
+	updated_at?: Date
+	deleted_at?: Date
+}
+
 const articleFileSchema = new Schema(
 	{
 		key: { type: String, required: true },
@@ -13,7 +56,32 @@ const articleFileSchema = new Schema(
 	{ _id: false }
 )
 
-const articleSchema = new Schema({
+const articleContentSchema = new Schema(
+	{
+		details: { type: String, required: false, trim: true },
+		applications: { type: String, required: false, trim: true },
+		technical_sheet_url: {
+			type: String,
+			required: false,
+			trim: true,
+			validate: {
+				validator: (value: string | undefined) => {
+					if (!value) return true
+					try {
+						new URL(value)
+						return true
+					} catch {
+						return false
+					}
+				},
+				message: "technical_sheet_url must be a valid URL",
+			},
+		},
+	},
+	{ _id: false }
+)
+
+const articleSchema = new Schema<ArticleType>({
 	article_number: { type: String, required: true, unique: true }, // SAP ItemCode
 	description: { type: String, required: true },
 	unit: { type: String, required: true },
@@ -24,6 +92,7 @@ const articleSchema = new Schema({
 	tags: { type: [Types.ObjectId], ref: "Tag", default: [], index: true },
 	is_featured: { type: Boolean, default: false, index: true },
 	featured_order: { type: Number, default: 0 },
+	content: { type: articleContentSchema, required: false },
 	files: {
 		images: { type: [articleFileSchema], required: false },
 		datasheets: { type: [articleFileSchema], required: false },
@@ -46,4 +115,4 @@ articleSchema.index(
 )
 articleSchema.index({ is_featured: 1, featured_order: 1 }, { name: "articles_featured_order" })
 
-export default mongoose.models.Article || model("Article", articleSchema, "articles")
+export default mongoose.models.Article || model<ArticleType>("Article", articleSchema, "articles")

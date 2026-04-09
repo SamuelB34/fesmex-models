@@ -235,7 +235,7 @@ Usuarios internos del backoffice (vendedores, admin, técnicos, almacenistas, QA
 
 | Modelo | Colección | Descripción |
 |---|---|---|
-| `Article` | `articles` | Artículo principal. Tiene `article_number` (SAP ItemCode, unique), `group_id`, `category_id`, `tags[]`, `files.images[]`, `files.datasheets[]`, `is_featured` |
+| `Article` | `articles` | Artículo principal. Tiene `article_number` (SAP ItemCode, unique), `group_id`, `category_id`, `tags[]`, `content.details`, `content.applications`, `content.technical_sheet_url`, `files.images[]`, `files.datasheets[]`, `is_featured` |
 | `ArticleGroup` | `article_groups` | Grupo de artículos (name, description) |
 | `ArticleClass` | `article_classes` | Clase de artículo |
 | `ArticlePrice` | `article_prices` | Precio de artículo por `price_list_id` + `currency_id`. Index compuesto `(article_id, price_list_id)` |
@@ -248,7 +248,9 @@ Usuarios internos del backoffice (vendedores, admin, técnicos, almacenistas, QA
 | `ArticleView` | `article_views` | Registro de visitas a artículos (`article_id`, `visited_at`) |
 
 **Article sub-schemas** (embedded, `_id: false`):
+- `articleContentSchema`: `{ details, applications, technical_sheet_url }`
 - `articleFileSchema`: `{ key, url, filename, mime_type, size, uploaded_at, uploaded_by }`
+- `content` se usa para contenido rico opcional; `details` y `applications` son markdown, `technical_sheet_url` es una URL validada.
 - Almacenados en `files.images[]` y `files.datasheets[]`
 
 **Text search index**: `Article` tiene index de texto en `description`, `brand`, `model`.

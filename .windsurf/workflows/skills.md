@@ -185,6 +185,46 @@ const mainSchema = new Schema({
 - **Colección separada**: Datos que se consultan independientemente, tienen relaciones propias, o crecen mucho
   - Ejemplos: `ClientContact`, `QuoteArticle`, `ArticlePrice`
 
+### Receta: contenido rico opcional dentro de `Article`
+
+Usa este patrón cuando un artículo necesita un bloque de contenido estructurado, pero no merece una colección propia:
+
+```typescript
+const articleContentSchema = new Schema(
+	{
+		details: { type: String, required: false, trim: true }, // markdown
+		applications: { type: String, required: false, trim: true }, // markdown
+		technical_sheet_url: {
+			type: String,
+			required: false,
+			trim: true,
+			validate: {
+				validator: (value: string | undefined) => {
+					if (!value) return true
+					try {
+						new URL(value)
+						return true
+					} catch {
+						return false
+					}
+				},
+				message: "technical_sheet_url must be a valid URL",
+			},
+		},
+	},
+	{ _id: false }
+)
+
+const articleSchema = new Schema({
+	content: { type: articleContentSchema, required: false },
+})
+```
+
+**Reglas prácticas**:
+- Markdown simple y URL opcional: usa un embedded schema dentro del padre.
+- Varias secciones ricas que cambian juntas: sigue con `content.{...}`.
+- Si luego una sección necesita lifecycle o queries propias, conviértela en colección aparte.
+
 ---
 
 ## Skill 5: Agregar indexes

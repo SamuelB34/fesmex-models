@@ -1,4 +1,5 @@
 export { default as Article } from "./models/Article"
+export type { ArticleType, ArticleContentType } from "./models/Article"
 export { default as ArticleGroup } from "./models/ArticleGroups"
 export { default as ArticleClass } from "./models/ArticleClasses"
 export { default as ArticlePrice } from "./models/ArticlePrices"
