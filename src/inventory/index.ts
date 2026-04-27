@@ -6,6 +6,11 @@ export { default as ArticlePrice } from "./models/ArticlePrices"
 export { default as Currency } from "./models/Currencies"
 export { default as Warehouse } from "./models/Warehouses"
 export { default as InventoryStock } from "./models/InventoryStocks"
+export {
+	default as StockReservation,
+	StockReservationStatus,
+} from "./models/StockReservations"
+export type { StockReservationType } from "./models/StockReservations"
 export { default as PriceList } from "./models/PriceLists"
 export { default as Category } from "./models/Category"
 export { default as Tag } from "./models/Tag"
