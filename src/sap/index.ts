@@ -1,2 +1,6 @@
 export { SyncLog, SyncLogAction, SyncLogStatus, SyncLogType } from "./models/SyncLog"
 export type { ISyncLog } from "./models/SyncLog"
+export { default as SapOrder } from "./models/SapOrders"
+export type { SapOrderType } from "./models/SapOrders"
+export { default as SapOrderLine } from "./models/SapOrderLines"
+export type { SapOrderLineType } from "./models/SapOrderLines"
