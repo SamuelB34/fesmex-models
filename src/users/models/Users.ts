@@ -15,6 +15,11 @@ export enum UserStatus {
     SUSPENDED = "suspended",
 }
 
+export interface MonthlyGoal {
+    month: string
+    goal: number
+}
+
 export interface UserType {
     first_name: string
     middle_name?: string
@@ -28,6 +33,7 @@ export interface UserType {
     pipedrive_id?: string
     sap_employee_id?: string
     sap_id?: string
+    mensual_goal?: MonthlyGoal[]
     created_at: Date
     created_by?: mongoose.Types.ObjectId | string
     updated_at?: Date
@@ -35,6 +41,14 @@ export interface UserType {
     deleted_at?: Date
     deleted_by?: mongoose.Types.ObjectId
 }
+
+const monthlyGoalSchema = new Schema<MonthlyGoal>(
+    {
+        month: { type: String, required: true },
+        goal: { type: Number, required: true },
+    },
+    { _id: false },
+)
 
 const usersSchema = new Schema<UserType>({
     first_name: { type: String, required: true },
@@ -57,6 +71,7 @@ const usersSchema = new Schema<UserType>({
     pipedrive_id: { type: String },
     sap_id: { type: String },
     sap_employee_id: { type: String },
+    mensual_goal: { type: [monthlyGoalSchema] },
     created_at: { type: Date, default: Date.now },
     created_by: { type: Schema.Types.Mixed, ref: "User" },
     updated_at: { type: Date },
